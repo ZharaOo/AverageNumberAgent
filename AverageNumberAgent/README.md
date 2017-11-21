@@ -1,4 +1,4 @@
-#AverageNumberBetweenAgents
+ # Average Number Between Agents
 
 Авторы: Иван Бабкин, Артем Епрев, Дарья Ткачева
 
