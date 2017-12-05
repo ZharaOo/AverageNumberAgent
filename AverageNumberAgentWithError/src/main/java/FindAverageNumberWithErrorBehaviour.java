@@ -2,14 +2,13 @@ import jade.core.AID;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 
-import java.util.Dictionary;
-import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
 
     public void action() {
         AverageNumberAgent agent = (AverageNumberAgent)myAgent;
+
         for (int i = 0; i < 1000; i++) {
             sendMessage(agent);
             receiveMessage(agent);
@@ -20,9 +19,11 @@ public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
 
     private void sendMessage (AverageNumberAgent agent) {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+
         for (AID name : agent.neighbors) {
             //Генерируем возможность обрыва связи.
             double connectionExistParam = Math.random();
+
             if (connectionExistParam > 0.3) {
                 msg.addReceiver(name);
             }
@@ -49,6 +50,7 @@ public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
 
             if (msg.getPerformative() == ACLMessage.INFORM) {
                 double myNumber = agent.getMyNumber();
+
                 if (numberFromNeighbor < myNumber) {
                     double average = (myNumber + numberFromNeighbor) / 2;
                     agent.setMyNumber(average);
