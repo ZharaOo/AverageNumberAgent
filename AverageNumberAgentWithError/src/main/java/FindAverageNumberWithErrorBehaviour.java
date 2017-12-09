@@ -42,7 +42,9 @@ public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
 
         try {
             TimeUnit.MILLISECONDS.sleep(delay);
-        } catch (InterruptedException e) {}
+        } catch (InterruptedException e) {
+            System.out.println(e.toString());
+        }
 
         agent.send(msg);
     }
@@ -71,7 +73,9 @@ public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
 
                     try {
                         TimeUnit.MILLISECONDS.sleep(delay);
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                        System.out.println(e.toString());
+                    }
 
                     agent.send(reply);
                 }

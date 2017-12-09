@@ -32,7 +32,9 @@ public class AverageNumberAgent extends Agent{
 
         try {
             TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {}
+        } catch (InterruptedException e) {
+            System.out.println(e.toString());
+        }
 
         addBehaviour(new FindAverageNumberWithErrorBehaviour());
     }
