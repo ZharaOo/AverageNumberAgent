@@ -1,15 +1,17 @@
  # Average Number Between Agents With Error
  
- Генерируемые ошибки:
+ #### Генерируемые ошибки:
  1. Обрыв связи
  2. Помехи при передаче данных
  3. Задержка отправки данных
 
-Создание агента в аргументах при запуске: AgentName:AgentClass(neighbour1,neighbour2,...)
+#### Создание агента в аргументах при запуске:
+  AgentName:AgentClass(neighbour1,neighbour2,...)
 
-Main class: jade.Boot
+#### Main class:
+  jade.Boot
 
-Пример аргументов программы при запуске:
+#### Пример аргументов программы при запуске:
 
 -gui
 -local-port 1111
