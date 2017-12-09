@@ -6,6 +6,10 @@ import java.util.concurrent.TimeUnit;
 
 public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
 
+    private final static double PROBABILITY_OF_CONNECTION_BREAK = 0.3;
+    private final static int MAX_DELAY = 10;
+    private final static double MAX_ERROR = 0.05;
+
     public void action() {
         AverageNumberAgent agent = (AverageNumberAgent)myAgent;
 
@@ -24,17 +28,17 @@ public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
             //Генерируем возможность обрыва связи.
             double connectionExistParam = Math.random();
 
-            if (connectionExistParam > 0.3) {
+            if (connectionExistParam > PROBABILITY_OF_CONNECTION_BREAK) {
                 msg.addReceiver(name);
             }
         }
 
         //Генерируем ошибку в передаче данных до 2%
-        Double error = agent.getMyNumber() * (Math.random() * 0.02 - 0.01);
+        double error = agent.getMyNumber() * ((Math.random() * 0.5 - 1) * MAX_ERROR);
         msg.setContent(Double.toString(agent.getMyNumber() - error));
 
         //Генерируем задержку в отправке сообщений до 10 миллисекунд
-        Integer delay = (int)(Math.random() * 10);
+        int delay = (int)(Math.random() * MAX_DELAY);
 
         try {
             TimeUnit.MILLISECONDS.sleep(delay);
@@ -46,7 +50,7 @@ public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
     private void receiveMessage (AverageNumberAgent agent) {
         ACLMessage msg;
         while ((msg = myAgent.receive()) != null) {
-            Double numberFromNeighbor = Double.parseDouble(msg.getContent());
+            double numberFromNeighbor = Double.parseDouble(msg.getContent());
 
             if (msg.getPerformative() == ACLMessage.INFORM) {
                 double myNumber = agent.getMyNumber();
@@ -59,11 +63,11 @@ public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
                     reply.setPerformative(ACLMessage.REQUEST);
 
                     //Генерируем ошибку в передаче данных до 2%
-                    Double error = (average - numberFromNeighbor) * (Math.random() * 0.02 - 0.01);
+                    double error = (average - numberFromNeighbor) * ((Math.random() * 0.5 - 1) * MAX_ERROR);
                     reply.setContent(Double.toString(average - numberFromNeighbor - error));
 
                     //Генерируем задержку в отправке сообщений до 10 миллисекунд
-                    Integer delay = (int)(Math.random() * 10);
+                    int delay = (int)(Math.random() * MAX_DELAY);
 
                     try {
                         TimeUnit.MILLISECONDS.sleep(delay);
