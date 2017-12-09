@@ -34,7 +34,7 @@ public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
         }
 
         //Генерируем ошибку в передаче данных до 2%
-        double error = agent.getMyNumber() * ((Math.random() * 0.5 - 1) * MAX_ERROR);
+        double error = agent.getMyNumber() * ((Math.random() - 0.5) * MAX_ERROR);
         msg.setContent(Double.toString(agent.getMyNumber() - error));
 
         //Генерируем задержку в отправке сообщений до 10 миллисекунд
@@ -65,7 +65,7 @@ public class FindAverageNumberWithErrorBehaviour extends OneShotBehaviour {
                     reply.setPerformative(ACLMessage.REQUEST);
 
                     //Генерируем ошибку в передаче данных до 2%
-                    double error = (average - numberFromNeighbor) * ((Math.random() * 0.5 - 1) * MAX_ERROR);
+                    double error = (average - numberFromNeighbor) * ((Math.random() - 0.5) * MAX_ERROR);
                     reply.setContent(Double.toString(average - numberFromNeighbor - error));
 
                     //Генерируем задержку в отправке сообщений до 10 миллисекунд
